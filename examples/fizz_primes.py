@@ -13,7 +13,7 @@ import sys
 
 sys.setrecursionlimit(10000)
 
-from fb1337 import run, run_annotated
+from fb1337 import run, run_annotated, run_interactive
 
 # Code Golf Program Challenges
 
@@ -102,22 +102,39 @@ arraybuzz_output = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, '
                   'Buzz']
 
 
-
-
-# The Sieve of Eratosthenes in 32 characters
+# The Sieve of Eratosthenes in 25 characters
 # Find all primes up to some number n, by eliminating all multiples of smaller primes
 eratosthenes_commented = """
-➊⍳∂				    s = list(range(1, n+1))
-@0Ø					s[1] = None
-Ω2λ$1√≤)µ∂⪼◇):		for i=2; i < sqrt(n); i = s.next():
-@{(_²)$1_Ø;			    s[i^2:n:i] = None
-◌					for p in s: output p
+Ø‿Ø➊⩔⍳⩓⊕			s = [Ø, Ø] + list(range(2, n+1))
+∂:					for i in s:
+_➊√>?⌁					if i > sqrt(n): break
+@{(_²)Ø_Ø				else: s[i*i::i] = ''
 """
 
 eratosthenes_title = "The Sieve of Eratosthenes"
 eratosthenes_name = "eratosthenes"
 eratosthenes_parameters = [50]
 eratosthenes_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+
+
+# The Sieve of Eratosthenes in 22 characters
+# Find all primes up to some number n, by eliminating all multiples of smaller primes
+# Uses a filter instead of iteration.
+
+eratos_filter_commented = """
+2➊⍳↓1				i = 2; s = list(range(2, n+1)) 
+⍣µ					repeat:
+}⟜⫣%					s.filter(x -> not i divides x)
+∂⍮⬇)					stack.append(i); i = s[0]; s = s[1:]
+µ⨩➊√>)				until: i > isqrt(n)
+☆					stack += s
+"""
+
+eratos_filter_title = "The Sieve of Eratosthenes"
+eratos_filter_name = "eratosthenes"
+eratos_filter_parameters = [50]
+eratos_filter_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+
 
 # Iverson Primes in 9 characters
 # Less efficient, but more concise way to find the primes by removing multiples
@@ -139,6 +156,17 @@ iverson_parameters = [50]
 iverson_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
 
+# Built-in Primes 2 characters
+built_in_primes_commented = """
+➊𝜋					Use built-in function for fast prime generation using numpy
+"""
+
+built_in_primes_title = "Built-in Primes"
+built_in_primes_name = 'built-in'
+built_in_primes_parameters = [50]
+built_in_primes_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+
+
 # HOW TO RUN CODE
 
 # 1. Run raw code
@@ -152,22 +180,18 @@ result = run(name=arraybuzz_name, commented_code=arraybuzz_commented, parameters
 print(result)
 result = run(name=eratosthenes_name, commented_code=eratosthenes_commented, parameters=eratosthenes_parameters)
 print(result)
+result = run(name=eratos_filter_name, commented_code=eratos_filter_commented, parameters=eratos_filter_parameters)
+print(result)
 result = run(name=iverson_name, commented_code=iverson_commented, parameters=iverson_parameters)
+print(result)
+result = run(name=built_in_primes_name, commented_code=built_in_primes_commented, parameters=built_in_primes_parameters)
 print(result)
 print()
 
 # 2. Run with extra information
-# run_annotated(title=fizzbuzz_title, name=fizzbuzz_name, commented_code=fizzbuzz_commented, parameters=fizzbuzz_parameters, expected=fizzbuzz_output)
 run_annotated(title=golfbuzz_title, name=golfbuzz_name, commented_code=golfbuzz_commented,
               parameters=golfbuzz_parameters, expected=golfbuzz_output)
-# run_annotated(title=combuzz_title, name=combuzz_name, commented_code=combuzz_commented, parameters=combuzz_parameters, expected=combuzz_output)
-# run_annotated(title=eratosthenes_title, name=eratosthenes_name, commented_code=eratosthenes_commented, parameters=eratosthenes_parameters, expected=eratosthenes_output)
-# run_annotated(title=iverson_title, name=iverson_name, commented_code=iverson_commented, parameters=iverson_parameters, expected=iverson_output)
 
 
 # 3. Run in interactive_mode with code comments
 # run_interactive(name=fizzbuzz_name, commented_code=fizzbuzz_commented, parameters=fizzbuzz_parameters)
-# run_interactive(name=golfbuzz_name, commented_code=golfbuzz_commented, parameters=golfbuzz_parameters)
-# run_interactive(name=combuzz_name, commented_code=combuzz_commented, parameters=combuzz_parameters)
-# run_interactive(name=eratosthenes_name, commented_code=eratosthenes_commented, parameters=eratosthenes_parameters)
-# run_interactive(name=iverson_name, commented_code=iverson_commented, parameters=iverson_parameters)

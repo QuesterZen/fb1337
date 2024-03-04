@@ -5,6 +5,7 @@ fb1337 is an experimental, highly expressive, stack- and array- based code golfi
 It's goal is to explore the limits of expressiveness and brevity in translating algorithms into runnable code.
 
 FizzBuzz in fb1337 is a mere 20 characters long!
+
 ```fb1337
 ḣ:Fizz‿Buzz3‿5_|⊃'_∨
 ```
@@ -360,7 +361,7 @@ This is a much harder problem than the others and the solution is more involved,
 
 2. **The Interactive Debugger** can be started by running a program with `run_interactive` in `fbleet.py`. This is a simple GUI interface what allows you to step through code token-by-token and see which type specialisation the interpreter has chosen; which parameters it picked up; what the local and external environments contain; and a listing of all values on the stack.
    
-   ![Interactive Debugger](/Users/jamesleibert/Desktop/Project%20Working/FBLeet/docs/InteractiveDebuggerImage.jpg)
+   ![Interactive Debugger](/Users/jamesleibert/Desktop/Project%20Working/fb1337/docs/InteractiveDebuggerImage.jpg)
 
 3. **Code Annotation** The fb1337 parser allows the user to annotate the code and provide some level of code formatting to make programs more readable.
    
@@ -371,12 +372,12 @@ This is a much harder problem than the others and the solution is more involved,
     Line comments start with a '\t' or `⍝` 'comment' character and last until the newline. Comments are stored with the code token immediately before them and displayed in the Interactive Debugger.
    
    ```fb1337
-   ḣ:					for i in range(1, 101):
-   Fizz‿Buzz				{Fizz, Buzz} list of strings to select from
-   3‿5_|					{i divides 3?, i divides 5?} boolean selector list
-   ⊃						pick elements of string list based on whether 1/True in selector list
-   '						turn the resulting list of 0 or more strings into a single string
-   _∨						if string is '' then i else string
+   ḣ:                    for i in range(1, 101):
+   Fizz‿Buzz                {Fizz, Buzz} list of strings to select from
+   3‿5_|                    {i divides 3?, i divides 5?} boolean selector list
+   ⊃                        pick elements of string list based on whether 1/True in selector list
+   '                        turn the resulting list of 0 or more strings into a single string
+   _∨                        if string is '' then i else string
    ```
 
 (Someday, I might get around to creating a fully interactive GUI programming sandbox, somewhat like [BQN Pad](https://bqnpad.mechanize.systems).)
@@ -459,37 +460,17 @@ If you want to practice with the language, try solving the following problems, u
 4. For each value in the List [2 3 5 7 8 11 12 13], for the even values halve the value, for the odd values multiply by 3 and add 1. Repeat this 10 times.
 
 5. Generate a list of all prime numbers up to 30
- 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 
 ## Possible Solutions
-   
+
 The following solutions all use only the 50 glyph subset of the language indicated above.
-   
+
 1. `1‿2‿3‿4‿5‿6‿7 ∂ 3‿2‿1‿6‿5‿4‿7 =⊃`
-   
+
 2. `5‿6‿8‿9‿3‿2‿10‿8‿4 } µ∂ 3≥ « 7≤ ∧)`
-   
+
 3. `µ∂/+«#÷)→avg, 2‿3‿5‿7 £avg 2‿4‿6‿8 £avg ⌈`
-   
+
 4. `2‿3‿5‿7‿8‿11‿12‿13 10:¨µ∂ 2%0= ? µ2÷) µ3×1+))`
-   
+
 5. `µ∂ #0= ? ◌ µ∂ 0⊇→p } µ $p% 0>) $p« £prime))→prime, 30⍳↓1 £prime`

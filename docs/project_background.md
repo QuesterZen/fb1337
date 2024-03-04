@@ -30,14 +30,22 @@ APL is better at 38, but good luck making sense of it if you don't know APL.
 {∊(3↑(0=3 5|⍵)∪1)/'Fizz' 'Buzz'⍵}¨⍳100
 ```
 
-For what it's worth, we can replace the glyphs with their names and read it backwards to get something fairly readable. Converting to Perl / Python notation, we can finally understand how it works.
+For what it's worth, we can replace the glyphs with their names and read it backwards to get something fairly readable. 
+
 ```
-100 iota map {['Fizz' 'Buzz' right-arg] replicate (1 union ([3 5] residue right-arg equal 0) take 3) enlist}
-
-1..100 map (['Fizz', 'Buzz', $_] * (($_ % [3, 5] == 0).union([1]))[-3:]) list)
+100 iota map 
+{['Fizz' 'Buzz' right-arg] replicate 
+(1 union ([3 5] residue right-arg equal 0) take 3) 
+enlist}
 ```
 
+Converting to more familiar Perl / Python -ish notation, we can finally understand how it works.
 
+```
+1..100 map (['Fizz', 'Buzz', $_] * (($_ % [3, 5] == 0).union(1))[:3]) list)
+```
+
+Note that APL is exploiting some unexpected behaviour too:  `∪1` 'union 1' adds a `1` to the selection list if it doesn't already contain one; and `3↑`'take 3' will provide an additional `0` by default otherwise.
 
 Perhaps one could conceive of a language that combines the best of all worlds: as terse as APL, as expressive as APL, but as clear as Python? Perhaps we can invent a language in which FizzBuzz can be written in 23 characters as:
 
@@ -71,13 +79,15 @@ Additionally, if the hypothetical code is part of the language, what limitations
 
 I was keen to find out!
 
-## The goal of fb1337
+## The goals of fb1337
 
-fb1337 was my attempt to convert the above code snippet into a functional all-purpose language. I set myself two goals for the project:
+fb1337 was my attempt to convert the above code snippet into a functional all-purpose language. I set myself three goals for the project:
 
 1. Express FizzBuzz a tersely and clearly as possible. Ideally as close as possible to 20 characters without sacrificing readability. Is the hypothetical example above practical? What limitations will it impose on the language as a whole?
 
 2. Code a wide variety of code challenge problems in the language to demonstrate the universal applicability of the language for these kinds of problems. (I chose the first 20 problems from [Project Euler](https://forum.projecteuler.net/about), and a selection of 40 [LeetCode](https://leetcode.com) challenge problems from Conor Hoekstra's YouTube channel).
+
+3. To write a personal code golfing language to use for my own enjoyment!
 
 ## Research and inspiration
 
@@ -89,10 +99,8 @@ I looked to a number of places for inspiration.
 
 3. *Combinators* Also following a lead from Hoekstra, I explored the world of combinatory logic, reading [Raymond Smullyan's "To Mock a Mockingbird"](https://a.co/d/91w8NSg) and researching some of the mathematical history of [combinatory logic](https://en.wikipedia.org/wiki/Combinatory_logic).
 
-4. *Code Golf* I looked at three languages that were created for competitive [code golf](https://en.wikipedia.org/wiki/Code_golf#Dedicated_golfing_languages). I had come across [Paradoc](https://github.com/betaveros/paradoc) a few years ago and had resolved to look more closely at it. [GolfScript](http://www.golfscript.com/golfscript/) is one of the very first code golf language and its sheer simplicity was a revelation given how powerful it is. Finally, I looked at one of the most recent code golf languages, [Jelly](https://github.com/DennisMitchell/jellylanguage?tab=readme-ov-file) which is a good deal more complicated. I briefly looked at Uiua, which has many features in common with code golfing languages and is an odd hybrid of stack-based and array-based idioms.
+4. *Code Golf* I looked at three languages that were created for competitive [code golf](https://en.wikipedia.org/wiki/Code_golf#Dedicated_golfing_languages). I had come across Brian Chen (Betaveros)'s  [Paradoc](https://github.com/betaveros/paradoc) a few years ago and had resolved to look more closely at it (He has also written an interesting [Introduction to Code Golf](https://blog.vero.site/post/golf). [GolfScript](http://www.golfscript.com/golfscript/) is one of the very first code golf language and its sheer simplicity was a revelation given how powerful it is. Finally, I looked at one of the most recent code golf languages, [Jelly](https://github.com/DennisMitchell/jellylanguage?tab=readme-ov-file) which is a good deal more complicated. For more on code golf, see [A Short Potted History of Code Golf](code_golf.md).
 
 5. *Stack-Based Byte Code* I brought some previous experience to the project having previously written a stack-based byte code interpreter for Scheme, [4Scheme](https://gitlab.com/QuesterZen/4Scheme). For that project I had done some reading on the [Java Virtual Machine Byte Code](https://en.wikipedia.org/wiki/Java_bytecode) which is predominantly stack-based, and on the stack language [Forth](https://amzn.asia/d/i8Gi9Ut). The project was also invaluable for my design for the interpreter eval / apply loop and the implementation of the local naming environment.
 
 6. *Elixir* Of all the functional languages, [Elixir](https://elixir-lang.org) seems to be the best designed from the perspective of readability and practical programming. While Elixir wasn't a direct inspiration for any of the features of the final language, I had Elixir in mind as a benchmark for clarity of expression and readability of code.
-
-#TODO Add short section on Code Golfing

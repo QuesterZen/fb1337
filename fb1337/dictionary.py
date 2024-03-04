@@ -9,7 +9,7 @@
 # Dictionary Type
 
 
-from fb1337.iterators import ListIterator
+from fb1337.array import FlatList
 
 
 class Dictionary:
@@ -30,13 +30,13 @@ class Dictionary:
 			return self
 
 	def keys(self):
-		return ListIterator(list(self.dictionary.keys()))
+		return FlatList(list(self.dictionary.keys()))
 
 	def values(self):
-		return ListIterator(list(self.dictionary.values()))
+		return FlatList(list(self.dictionary.values()))
 
 	def items(self):
-		return ListIterator([[k, v] for k, v in self.dictionary.items()])
+		return FlatList([[k, v] for k, v in self.dictionary.items()])
 
 	def __repr__(self):
 		return '<Dict ' + str(self.dictionary) + ">"
