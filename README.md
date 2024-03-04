@@ -2,7 +2,7 @@
 
 fb1337 is an experimental highly expressive, stack- and array- based code golfing language written in Python.
 
-It's goal is to explore the limits of expressive and concise translation of algorithms into runnable code.
+Its goal is to explore the limits of expressive and concise translation of algorithms into runnable code.
 
 ## Quick Overview
 
@@ -14,19 +14,19 @@ For example, FizzBuzz is only 20 characters in fb1337:
 ḣ:Fizz‿Buzz3‿5_|⊃'_∨
 ```
 
-While APL was an inspiration and many of the glyphs are shared with APL, the syntax is very different. The biggest difference being that fb1337 is a stack-based language. Similar languages are the code golf language, GolfScript, and the stack-/array- hybrid language, Uiua.
+While APL was an inspiration and many of the glyphs are shared with APL, the syntax is very different. The biggest difference being that fb1337 is a stack-based language. Similar languages are the code golf language, GolfScript, and the stack- and array- hybrid language, Uiua.
 
-For more on the language see [Language Overview](fb1337%20language%20overview.md).
+For more on the language see [Language Overview](./docs/language_overview.md).
 
-For more on how the internals work see [Parser Description](fb1337%20parser%20documentation.md) and [Interpreter Internals](fb1337%20internals.md). 
+For more on how the internals work see [Parser Description](./docs/code_and_parameter_parsing.md) and [Interpreter Internals](./docs/interpreter_internals.md). 
 
 ## Installing and Using fb1337
 
-Download all of the code in the project to a new folder on your computer and name it fb1337.
+Download all the code in the project to a new folder on your computer and name it fb1337.
 
 #### Option 1. Run from the command line
 
-In terminal navigate to the `fb1337/cli` folder. To run a simple program as a string, type:
+In your terminal, navigate to the `fb1337/cli` folder. To run a simple program as a string, type:
 
 ```bash
 ./fb1337 -c 'Hello` World`!'
@@ -98,14 +98,16 @@ pip uninstall fb1337
 
 ## Documentation Index
 
-- [Language Overview](language_overview.md) provides an overview of how to program in fb1337. This is the best place to start if you want to try programming in the language
+- [Language Overview](./docs/language_overview.md) provides an overview of how to program in fb1337. This is the best place to start if you want to try programming in the language
 
-- [Operator Documentation](operator_documentation.md) provides a comprehensive list of all fb1337's operators. Go here if you want to browse the available functionality, or need help on a particular operator. Note that most of the time, the [Command Assistant](../tools/command_assistant.py) is a more practical tool - to learn how to use it, see the [Language Overview/Tools](language_overview.md/#tools-tools-to-aid-programming-in-fb1337).
+- [Input Parsing](./docs/code_and_parameter_parsing.md) and [Interpreter Internals](./docs/interpreter_internals.md) provide a lot more details on the language and how expressions are parsed and evaluated. If you are confused about how to enter data, or how expressions are being evaluated, or simply want to know more about how fb1337 was created, these documents are a useful place to start. If you want to read the source code, the main file to look at is [execute.py](./fb1337/execute.py) and work from there.
 
-- [Input Parsing](input_parsing.md) and [Interpreter Internals](interpreter_internals.md) provide a lot more details on the language and how expressions are parsed and evaluated. If you are confused about how to enter data, or how expressions are being evaluated, or simply want to know more about how fb1337 was created, these documents are a useful place to start. If you want to read the source code, the main file to look at is [execute.py](../fb1337/execute.py) and work from there.
+- [Simple Programs](./docs/simple_programs.md) is an ongoing list of some simple code challenges and the shortest or most interesting solutions in fb1337 so far.
 
-- [Combinatory Logic](combinatory_logic.md) is a quick guide to functional combinators if you were wondering about their use in fb1337. The code_report YouTube channel has lots of information on APL and combinators, in particular I would recommend the talk by Conor Hoekstra [Function Composition in Programming Languages]([Function Composition in Programming Languages - Conor Hoekstra - CppNorth 2023 - YouTube](https://www.youtube.com/watch?v=JELcdZLre3s))
+- [Background](./docs/project_background.md) is a document about the reason for creating this project as well as some background information on APL, array languages, functional programming and code golfing.
 
-- [Background](background.md) is a document about the reason for creating this project as well as some background information on APL, array languages, functional programming and code golfing.
+- [Project Reflections](./docs/project_reflections.md) is an essay about my learnings from this project. In particular, whether there are significant opportunities for greater brevity and expressivity that 'off the path' languages such as APL, Lisp, Haskell and Forth can teach us. 
 
-- [Project Reflections](project_reflections.md) is an essay about my learnings from this project. In particular, whether there are significant opportunities for greater brevity and expressivity that 'off the path' languages such as APL, Lisp, Haskell and Forth can teach us. 
+- [Combinatory Logic](./docs/combinatory_logic.md) is a quick guide to functional combinators if you were wondering about their use in fb1337. The code_report YouTube channel has lots of information on APL and combinators, in particular I would recommend the talk by Conor Hoekstra [Function Composition in Programming Languages]([Function Composition in Programming Languages - Conor Hoekstra - CppNorth 2023 - YouTube](https://www.youtube.com/watch?v=JELcdZLre3s))
+
+- [Code Golf](./docs/code_golf.md) is an introduction to the weird and wacky world of code golfing.
