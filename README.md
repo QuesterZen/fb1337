@@ -1,4 +1,5 @@
-![fb1337 logo](./docs/fb1337_logo)
+![fizz buzz in fb1337](./docs/FizzBuzz.jpg)
+
 # fb1337 Quick Start Guide
 
 fb1337 is an experimental highly expressive, stack- and array- based code golfing language written in Python.
@@ -11,7 +12,6 @@ Programs in fb1337 typically consist of extremely short strings of unicode chara
 
 For example, FizzBuzz is only 20 characters in fb1337:
 
-![fizz buzz in fb1337](./docs/FizzBuzz.jpg)
 ```fb1337
 ḣ:Fizz‿Buzz3‿5_|⊃'_∨
 ```
