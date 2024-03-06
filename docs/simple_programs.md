@@ -13,33 +13,42 @@ Please feel free to add examples to this page, including:
 ## Hello World!
 
 ```fb1337
-Hello` World`!
+Hello` World`!						⍝ shortest
 ```
 
-## FizzBuzz 3 ways
+## FizzBuzz
 
 ```fb1337
-ḣ:Fizz‿Buzz3‿5_|⊃'_∨
-ḣ:_‰3⁈Fizz_‰5⁈Buzz⊕_∨
-ḣ⍳𝔰∨∘⊸(3‿5)⊚|⋮∘⊸(Fizz‿Buzz)⊃'
+ḣ:Fizz‿Buzz3‿5_|⊃'_∨				⍝ shortest
+ḣ:_‰3⁈Fizz_‰5⁈Buzz⊕_∨				⍝ clearest
+ḣ⍳𝔰∨∘⊸(3‿5)⊚|⋮∘⊸(Fizz‿Buzz)⊃'		⍝ point-free combinator
 ```
 
-## First 100 Primes 3 ways
+## First 100 Primes
 
 ```fb1337
-ḣ⍳↓1𝒮⟈𝒲⊚×
-ḣ⍳∂∂⩔!~«%1=⊃
-Ωµḣ⍳↓1)λ#)λ}λ◇‱¬)):_◇;
+ḣ𝜋									⍝ built-in
+ḣ⍳↓1𝒮⟈𝒲⊚×							⍝ shortest
+ḣ⍳∂∂⩔!~«%1=⊃						⍝ using number theory
+Ø‿Øḣ⩔⍳⩓⊕∂:_ḣ√>?⌁@{(_²)Ø_Ø			⍝ fastest: Sieve of Eratosthenes
 ```
 
 ## Is it prime?
 
 ```fb1337
-∂√⍳↓1𝒞|⊐¬
+ℸ#1=								⍝ built-in
+∂√⍳↓1𝒞|⊐¬							⍝ shortest
+```
+
+## Shortest Infinite Loop
+
+```fb1337
+:									⍝ shortest
+⍣⊢Ø									⍝ shortest non-trivial
 ```
 
 ## Separate A List into Odd and Even Values
 
 ```fb1337
-∂2%⊆
+∂2%⊆								⍝ shortest
 ```

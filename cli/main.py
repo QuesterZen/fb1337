@@ -61,7 +61,7 @@ if __name__ == "__main__":
 		debug = False
 		interactive = False
 		program = None
-		name: str = None
+		name = None
 		parameters = []
 
 		# Parse options and parameters

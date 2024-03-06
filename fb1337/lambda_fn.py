@@ -101,7 +101,7 @@ class Lambda:
 		W		Warbler		Join		λab.abb				Join 		𝒲 			x𝒲f -> f(x,x)					∂ f
 		C		Cardinal	Flip		λabc.acb			Flip  		𝒞			xy𝒞f -> f(y,x)					« f
 
-		B		Bluebird	Compose		λabc.a(bc..)		Compose 	∘			#∘fg -> f(g(#))					g f
+		B		Bluebird	Compose		λabc.a(bc)		    Compose 	∘			#∘fg -> f(g(#))					g f
 		S		Starling	Compare		λabc.ac(bc)			S-Comb 		𝒮			x𝒮fg -> f(x,g(x))				∂ g f
 		Σ		Violet S	Compare'	λabc.a(bc)c			S'-Comb		𝔰			x𝔰fg -> 	f(g(x),x) 				∂ ⍮g f
 		Ψ		Psi			On			λabcd.a(bc)(bd)		Psi-Comb 	Ψ			xyΨfg -> g(f(x),f(y))			f ⍮f g

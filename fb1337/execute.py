@@ -99,12 +99,12 @@ class Program:
 			code_parameters.append(env.pop())
 
 		for fn_token in token.fn_tokens:
-			# We want to use high-level functions with simple operators (eg. reduce (/+ in APL), combinators (/+÷# in APL) etc.)
+			# We want to use high-level functions with simple operators (e.g. reduce (/+ in APL), combinators (/+÷# in APL) etc.)
 			# So when we see a symbol as a fn parameter, we assume it is to be used this way,
 			# The code below seems absurd, but seems to be necessary due to a weird Python 3 'bug'
 			# just adding lambda e: self.eval_context(env, code_token) to the code_parameters doesn't work
 			# python does not generate new lambdas each time through - it returns the same lambda every time, so this code forces
-			# it to generate a brand new lambda each time. In particular the combinators wouldn't work without this change!
+			# it to generate a brand-new lambda each time. In particular the combinators wouldn't work without this change!
 			# https://docs.python-guide.org/writing/gotchas/#late-binding-closures
 			# So apparently this is a "feature" not a bug and due to python late binding / object reference assignment!
 			if fn_token.token_type == 'fn' and fn_token.value in 'λµ(κ$':

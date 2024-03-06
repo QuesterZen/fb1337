@@ -14,6 +14,7 @@ import re
 number_aliases = {'ḣ': 100, 'ḳ': 1000, 'Ḳ': 1024, 'ṁ': 1_000_000, 'ḃ': 1_000_000_000, 'ṫ': 10, 'Ḷ': 50, 'ḟ': 15, 'Ḟ': 255}
 number_names = {'ḣ': 'hundred', 'ḳ': 'thousand', 'Ḳ': 'binary k', 'ṁ': 'million', 'ḃ': 'billion', 'ṫ': 'ten', 'Ḷ': 'fifty', 'ḟ': 'fifteen', 'Ḟ': 'byte max'}
 
+
 class Reader:
 	"""The following methods are exposed:
 	    tokenize - converts a program into a list of tokens with comments embedded
@@ -48,8 +49,11 @@ class Reader:
 	comment_pattern = "\A[\t ]*([^\t⍝]*)[\t⍝]([^\n\r]*)(?:[\n\r]*)"
 
 	number_alias_lookup = number_aliases
-	
-	def __init__(self, patterns=token_patterns):
+
+
+	def __init__(self, patterns=None):
+		if patterns is None:
+			patterns = Reader.token_patterns
 		self.patterns = [(re.compile(pattern), name) for pattern, name in patterns]
 
 	def match(self, code_string, offset):
@@ -68,7 +72,6 @@ class Reader:
 		
 		print("Could not find a match for code", code)
 		raise SyntaxError
-
 
 	@staticmethod
 	def tokenize(program):
@@ -95,7 +98,6 @@ class Reader:
 				new_code = line.strip(' \t\n\r')
 				code += new_code
 				location += len(new_code)
-
 
 		# Parse the code (with comments removed) into tokens
 		reader = Reader()
@@ -146,7 +148,7 @@ class Reader:
 				token_type = 'value'
 				value = token.replace('`', '')
 				
-			tokens.append( (token_type, value,
-				{'comments': token_comments, 'token_code': token_code, 'code location': (token_start, location)}) )
+			tokens.append((token_type, value,
+				{'comments': token_comments, 'token_code': token_code, 'code location': (token_start, location)}))
 			
 		return tokens

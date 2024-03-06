@@ -377,7 +377,7 @@ FBLeet_language = [
     {'symbol': '⊡', 'signature': (1, 0, 0, 0), 'alias': 'list2mat', 'group': 'matrix', 'patterns': [
         {'signature': ('List',), 'description': 'convert a flat list to a matrix',
          'function': lambda e, s: convert_collection(s, 'Matrix')},
-        {'signature': ('Coordinate',), 'description': 'convert a corrdinate to a matrix',
+        {'signature': ('Coordinate',), 'description': 'convert a coordinate to a matrix',
          'function': lambda e, s: convert_collection(s, 'Matrix')},
         {'signature': ('Array',), 'description': 'convert a structured array to a matrix',
          'function': lambda e, s: convert_collection(s, 'Matrix')},

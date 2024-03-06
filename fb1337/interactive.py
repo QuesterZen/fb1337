@@ -106,7 +106,7 @@ class NotifyWindow(QMainWindow):
     def update(self, env, info_dictionary):
         """Display the notification information in the window"""
 
-        # Store the information provided so we can update the window again after taking action
+        # Store the information provided, so we can update the window again after taking action
         self.env = env
         self.info_dictionary = info_dictionary
 

@@ -106,6 +106,10 @@ class Iterator:
 			new_iterator.init = lambda e: new_iterator.array[new_iterator.pointer]
 			new_iterator.cond = lambda e: new_iterator.pointer < len(new_iterator.array)
 			new_iterator.update = lambda e: new_iterator.array[new_iterator.next()]
+		elif obj is None or obj == '':
+			new_iterator.init = lambda e: 1
+			new_iterator.cond = lambda e: True
+			new_iterator.update = lambda e: 1
 		else:
 			raise TypeError("Cannot iterate over", obj)
 		return new_iterator

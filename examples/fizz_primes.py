@@ -8,12 +8,11 @@
 # FizzPrimes.py
 # FB1337 code golf examples.
 
-
 import sys
 
-sys.setrecursionlimit(10000)
+from fb1337 import run, run_annotated
 
-from fb1337 import run, run_annotated, run_interactive
+sys.setrecursionlimit(10000)
 
 # Code Golf Program Challenges
 
@@ -93,14 +92,14 @@ arraybuzz_commented = """
 arraybuzz_title = "No Iteration FizzBuzz"
 arraybuzz_name = 'arraybuzz'
 arraybuzz_parameters = []
-arraybuzz_output = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz', 16, 17, 'Fizz',
-                  19, 'Buzz', 'Fizz', 22, 23, 'Fizz', 'Buzz', 26, 'Fizz', 28, 29, 'FizzBuzz', 31, 32, 'Fizz', 34,
-                  'Buzz', 'Fizz', 37, 38, 'Fizz', 'Buzz', 41, 'Fizz', 43, 44, 'FizzBuzz', 46, 47, 'Fizz', 49, 'Buzz',
-                  'Fizz', 52, 53, 'Fizz', 'Buzz', 56, 'Fizz', 58, 59, 'FizzBuzz', 61, 62, 'Fizz', 64, 'Buzz', 'Fizz',
-                  67, 68, 'Fizz', 'Buzz', 71, 'Fizz', 73, 74, 'FizzBuzz', 76, 77, 'Fizz', 79, 'Buzz', 'Fizz', 82, 83,
-                  'Fizz', 'Buzz', 86, 'Fizz', 88, 89, 'FizzBuzz', 91, 92, 'Fizz', 94, 'Buzz', 'Fizz', 97, 98, 'Fizz',
-                  'Buzz']
-
+arraybuzz_output = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz', 16, 17,
+                    'Fizz',
+                    19, 'Buzz', 'Fizz', 22, 23, 'Fizz', 'Buzz', 26, 'Fizz', 28, 29, 'FizzBuzz', 31, 32, 'Fizz', 34,
+                    'Buzz', 'Fizz', 37, 38, 'Fizz', 'Buzz', 41, 'Fizz', 43, 44, 'FizzBuzz', 46, 47, 'Fizz', 49, 'Buzz',
+                    'Fizz', 52, 53, 'Fizz', 'Buzz', 56, 'Fizz', 58, 59, 'FizzBuzz', 61, 62, 'Fizz', 64, 'Buzz', 'Fizz',
+                    67, 68, 'Fizz', 'Buzz', 71, 'Fizz', 73, 74, 'FizzBuzz', 76, 77, 'Fizz', 79, 'Buzz', 'Fizz', 82, 83,
+                    'Fizz', 'Buzz', 86, 'Fizz', 88, 89, 'FizzBuzz', 91, 92, 'Fizz', 94, 'Buzz', 'Fizz', 97, 98, 'Fizz',
+                    'Buzz']
 
 # The Sieve of Eratosthenes in 25 characters
 # Find all primes up to some number n, by eliminating all multiples of smaller primes
@@ -115,7 +114,6 @@ eratosthenes_title = "The Sieve of Eratosthenes"
 eratosthenes_name = "eratosthenes"
 eratosthenes_parameters = [50]
 eratosthenes_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
-
 
 # The Sieve of Eratosthenes in 22 characters
 # Find all primes up to some number n, by eliminating all multiples of smaller primes
@@ -135,10 +133,9 @@ eratos_filter_name = "eratosthenes"
 eratos_filter_parameters = [50]
 eratos_filter_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
-
 # Iverson Primes in 9 characters
 # Less efficient, but more concise way to find the primes by removing multiples
-# Less efficient because all nxn products are calculated explictly and removed individually
+# Less efficient because all nxn products are calculated explicitly and removed individually
 # The concision comes from using whole-of-array functions, rather than having to create loops and slices
 # The program is also point-free (ignoring the initial parameter)
 
@@ -155,7 +152,6 @@ iverson_name = "iverson"
 iverson_parameters = [50]
 iverson_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
-
 # Built-in Primes 2 characters
 built_in_primes_commented = """
 ➊𝜋					Use built-in function for fast prime generation using numpy
@@ -165,7 +161,6 @@ built_in_primes_title = "Built-in Primes"
 built_in_primes_name = 'built-in'
 built_in_primes_parameters = [50]
 built_in_primes_output = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
-
 
 # HOW TO RUN CODE
 
@@ -191,7 +186,6 @@ print()
 # 2. Run with extra information
 run_annotated(title=golfbuzz_title, name=golfbuzz_name, commented_code=golfbuzz_commented,
               parameters=golfbuzz_parameters, expected=golfbuzz_output)
-
 
 # 3. Run in interactive_mode with code comments
 # run_interactive(name=fizzbuzz_name, commented_code=fizzbuzz_commented, parameters=fizzbuzz_parameters)

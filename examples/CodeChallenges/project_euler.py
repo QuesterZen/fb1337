@@ -26,13 +26,13 @@ sys.setrecursionlimit(10000000)
 # 7. Find the 10001st prime number [104743]
 # 8. Find the 13 adjacent digits in the following 1000-digit number which have the greatest product. 
 #    What is their product? [23514624000]
-# 	 See euler 8.in for the 1000 digit number
+# 	 See euler 8.in for the 1000-digit number
 # 9. Find the pythagorean triple a^2 + b^2 = c^2 such that a + b + c = 1000. Find the product abc. [31875000]
 # 10. Find the sum of the primes below 2 million [142913828922]
 # 11. Find the greatest product of 4 numbers in a row in any direction (u, d, l, r, diagonally), in a 20x20 grid [70600674]
 # see euler 11.in
 # 12. What is the first triangle number with more than 500 divisors? [76576500]
-# 13. First 10 digits of the sum of 100 50-digit numbers" [5537376230]
+# 13. First 10 digits of the sum of 100 50-digit numbers [5537376230]
 # see euler 13.in
 # 14. Which start number under 1000000 leads to the longest Collatz chain? (x even -> x/2; x odd -> 3x+1 ... -> 1) [837799]
 # 15. How many down-right routes are there from the top-left to bottom-right of a 20x20 grid? [137846528820]

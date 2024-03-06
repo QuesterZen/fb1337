@@ -5,7 +5,7 @@
 # Copyright: James Leibert 2023
 # Licence: Available for use under the GPL3 Licence https://www.gnu.org/licenses/gpl-3.0.txt
 
-# command_assistnat.py
+# command_assistant.py
 # Lookup commands quickly
 
 
@@ -31,7 +31,7 @@ while True:
 
     if c in ['q', 'Q', 'x', 'X', 'exit', 'quit']:
         break
-    elif c in ['h','H','help','Help', '?']:
+    elif c in ['h', 'H', 'help', 'Help', '?']:
         print(help_text)
         print("----- parser -----")
         for k in number_aliases:
@@ -43,7 +43,7 @@ while True:
     elif c in ['symbols', '??', 'all??', 'all symbols', 'all ??', 'sym']:
         print('parser')
         print('\t', ' '.join([k for k in number_aliases] + ['Ø', '⍝']))
-        print_symbols(grouped=(not 'all' in c))
+        print_symbols(grouped=('all' not in c))
         continue
     found = False
 

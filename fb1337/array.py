@@ -24,7 +24,7 @@ class Array:
 		self.default = None
 		self.iterable_pointer = None
 
-	# Must be implemented by all sub classes
+	# Must be implemented by all subclasses
 
 	def get_shape(self):
 		"""For structured arrays, return a tuple containing the shape of the array.
@@ -253,7 +253,7 @@ class Array:
 			loc = len(values) + loc + 1
 		values = values[:loc] + [obj] + values[loc:]
 		if mutate:
-				return self.mutate(values)
+			return self.mutate(values)
 		else:
 			return self.build(values)
 
@@ -406,7 +406,6 @@ class Array:
 			group_struc = [[v for s, v in zip(self.all_values(), target) if s == g] for g in groups]
 		return StructuredArray(group_struc)
 
-
 	def partition(self, obj):
 		ranges = StructuredArray.make_ranges(self.all_values())
 		return StructuredArray(StructuredArray.select_ranges(obj, ranges))
@@ -475,7 +474,8 @@ class Array:
 		new_values = []
 		for index in valid_coordinates:
 			window_corner = [c - (w - 1) // 2 for c, w in zip(index, window_shape)]
-			window_coordinates = [tuple([c + w for c, w in zip(window_corner, window_relative_coord)]) for window_relative_coord in window_relative]
+			window_coordinates = [tuple([c + w for c, w in zip(window_corner, window_relative_coord)])
+			                      for window_relative_coord in window_relative]
 			if not edges and all([w in valid_coordinates for w in window_coordinates]):
 				values = [all_values[StructuredArray.flat_index_for_coordinate(c, shape)] for c in window_coordinates]
 				new_values.append(StructuredArray.reduce_struc(values, reduce_fn)[-1])
@@ -517,7 +517,8 @@ class Array:
 		else:
 			ValueError("Boolean mask template type not usable", type(template))
 		template_shape = StructuredArray.shape_of_structured(mask_template)
-		bool_mask = StructuredArray.indices_to_bool([StructuredArray.index_value(i) for i in self.structured_values()], template_shape)
+		bool_mask = StructuredArray.indices_to_bool([StructuredArray.index_value(i)
+		                                             for i in self.structured_values()], template_shape)
 		if isinstance(template, Array):
 			return template.build(bool_mask).reshape(template_shape)
 		elif Array.number(template):
@@ -693,7 +694,6 @@ class Array:
 			return self.build(result)
 
 	def outer_product(self, other, combine_fn):
-		result = []
 		rows = self.iterable()
 		cols = other.iterable()
 		return StructuredArray([[combine_fn(x, y) for y in cols] for x in rows])
@@ -714,7 +714,6 @@ class FlatList(Array):
 
 		self.values = values
 		self.default = default
-
 
 	# Required implementations
 
@@ -740,7 +739,7 @@ class FlatList(Array):
 	def build(self, structured_values):
 		return FlatList(StructuredArray.flatten_structured(structured_values))
 
-	# Specific to this sub-class
+	# Specific to this subclass
 
 	def slice(self, slice_obj):
 		return self.build(self.values[slice_obj.start_value:slice_obj.stop_value:slice_obj.step_value])
@@ -772,7 +771,7 @@ class FlatList(Array):
 	@classmethod
 	def int_list(cls, a, b=None):
 		"""Create a list of integers from a..b or b..a.
-        If only one value is provided, the list starts/ends at 1."""
+		If only one value is provided, the list starts/ends at 1."""
 		if b is None and a > 0:
 			return cls(list(range(1, a + 1, 1)))
 		elif b is None and a < 0:
@@ -865,7 +864,6 @@ class FlatList(Array):
 		else:
 			ranges = StructuredArray.make_ranges([x != obj for x in values])
 		return FlatList([FlatList(x) for x in StructuredArray.select_ranges(values, ranges)])
-
 
 	# Method overrides
 
@@ -962,8 +960,8 @@ class StructuredArray(Array):
 				return items
 			chunk_shape = rec_shape[1:]
 			chunk_size = reduce(mul, chunk_shape, 1)
-			return [shape_rec(items[(i * chunk_size):((i + 1) * chunk_size)], rec_shape[1:]) for i in
-					range(rec_shape[0])]
+			return [shape_rec(items[(i * chunk_size):((i + 1) * chunk_size)], rec_shape[1:])
+					for i in range(rec_shape[0])]
 
 		return shape_rec(values, shape)
 
@@ -1081,7 +1079,7 @@ class StructuredArray(Array):
 				return fn(a_struc, b_struc)
 			else:
 				raise ValueError("Incompatible shapes", StructuredArray.shape_of_structured(a_struc),
-								 StructuredArray.shape_of_structured(b_struc))
+								StructuredArray.shape_of_structured(b_struc))
 
 		return bi_rec(a, b)
 
@@ -1230,7 +1228,6 @@ class Matrix(Array):
 		new_struc = np.matmul(s_arr, o_arr)
 		return self.build(new_struc)
 
-
 	# Specific to this subclass
 
 	def matrix_binary(self, other, fn):
@@ -1275,7 +1272,6 @@ class Matrix(Array):
 		return np.linalg.det(self.structured_values())
 
 	def inverse(self):
-		shape = self.get_shape()
 		new_matrix = np.linalg.inv(self.structured_values())
 		return self.build(new_matrix)
 

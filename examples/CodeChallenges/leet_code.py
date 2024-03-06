@@ -15,13 +15,13 @@ from fb1337 import test, interactive_from_test_suite
 
 sys.setrecursionlimit(10000000)
 
-# Code Challenges Challenges
-# Taken from code_report channel on youtube; playlist Leetcode
+# Code Challenges
+# Taken from code_report channel on YouTube; playlist LeetCode
 # Series of https://leetcode.com challenges solved in APL/J/BQN/Uiua
 # See https://www.youtube.com/playlist?list=PLVFrD1dmDdvd_rChH0L1jeMVZpJ8ZIivE
 
 # 1. Sum the squares of the values in a list whose index divides the length of the list
-# 2. Is the given matrix an x-matrix ie. has non-zero values on the diagonals and zeros elsewhere
+# 2. Is the given matrix an x-matrix i.e. has non-zero values on the diagonals and zeros elsewhere
 # 3. Given a list of words and a string, does the string comprise the initial characters of the words in order (ie is it an acronym)
 # 4. Given a list of integers, what is the greatest number of positive values in its partial sums for all permutations of the values
 # 5. Given a list of integers, create a list consisting of the abs(sum of items to the left - sum of items to right)
@@ -32,7 +32,7 @@ sys.setrecursionlimit(10000000)
 # 10. Given a list containing '++x', 'x++', 'x--' and '--x' commands, find the final value of x when it starts at 0
 # 11. Find the greatest common divisor of the maximum and minimum values in a list
 # 12. Find the longest common prefix of a list of strings
-# 13. Given an index permutation (0-based) use it to permute the permutation list ie. res[i] = num[num[i]]
+# 13. Given an index permutation (0-based) use it to permute the permutation list i.e. res[i] = num[num[i]]
 # 14. Given a list of words, can the letters be re-arranged into the same number of identical words?
 # 15. What is the sign of the product of a list of numbers: 1 if positive, -1 if negative, 0 if 0
 # 16. Find the maximum nesting depth of parentheses in an expression
@@ -41,7 +41,7 @@ sys.setrecursionlimit(10000000)
 # 19. Given a grid of values, find the maximum row sum
 # 20. Count the number of negative values in an ordered grid
 # 21. Given an array of integers, how many of them have an even number of digits
-# 22. Find all words that follow a given pair of words eg. for "have you" , "how HAVE YOU been today" will return "been"
+# 22. Find all words that follow a given pair of words e.g. for "have you" , "how HAVE YOU been today" will return "been"
 # 23. Given a permutation, find the largest permutation (dictionary order) less than the original you can obtain with a single swap
 # 24. Given a list of values, count how many are not in the correct order
 # 25. Remove the outer parentheses on every first level group of parentheses
@@ -57,11 +57,11 @@ sys.setrecursionlimit(10000000)
 # 35. Given a Binary Search Tree and a target value; split the tree into a tree with values <= and values > preserving the tree structure
 # 36. Find how many equivalence classes of strings there are: a~b if the even characters are permutations and the odd characters are permutations
 # 37. Given a directed graph, how many nodes have all possible exit paths leading to a terminal node
-# 38. Given a list of integers, count the number of contiguous subarrays whose maximum is between L and R inclusive.
+# 38. Given a list of integers, count the number of contiguous sub-arrays whose maximum is between L and R inclusive.
 # 39. Given points on a number line, add k extra points to minimise the maximum distance between two points. Find this new minimum.
 # 40. Given an array, find the path from top left to bottom right with the smallest maximum grid value
 # 41. Given a list of coprime numbers, find the kth smallest fraction a/b where a, b are distinct values on the list
-# 42. How many tilings of a 2xN board are there using domino (I covering 2 squares) and triomino (L covering 3 squares)?
+# 42. How many tilings of a 2xN board are there using domino (I-shape covering 2 squares) and triomino (L-shape covering 3 squares)?
 # 43. What is the fewest number of same-position swaps to make two lists both strictly increasing?
 
 leet_code_solutions = [
