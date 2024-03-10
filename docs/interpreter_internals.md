@@ -7,8 +7,8 @@ The files in the directory `/fb1337` are structured as follows:
 Running Programs
 	fbleet.py				run programs in normal, annotation or interactive modes
 Interpreter
-	parser.py				parses input code into parser tokens
-	syntax.py				builds the program's Abstract Syntax Tree
+	lexer.py				parses input code into lexical tokens
+	parser.py				builds the program's Abstract Syntax Tree
 	execute.py				eval / apply loop which runs the Abstract Syntax Tree
 	commands.py				table of commands
 	environment.py			global stack and local namespaces
@@ -35,7 +35,7 @@ Index
 
 ## The Parser
 
-The code is tokenised by the [Reader object](../fb1337/parser.py) using a simple set of regex patterns. See [Parser Documentation](./parser.md) for more details on how the parser interprets code.
+The code is tokenised by the [Reader object](../fb1337/lexer.py) using a simple set of regex patterns. See [Parser Documentation](./interpreting_input) for more details on how the parser interprets code.
 
 A typical token produced by the parser is of the following form:
 ```
@@ -53,7 +53,7 @@ A typical token produced by the parser is of the following form:
 
 ## Syntax Tree Generation
 
-The tokens are arranged into a Syntax Tree by the [Syntax Tree object](../fb1337/syntax.py). The code tokens are read very much as they will be run, in the eval / apply loop. The resulting tree is structured as follows:
+The tokens are arranged into a Syntax Tree by the [Syntax Tree object](../fb1337/parser.py). The code tokens are read very much as they will be run, in the eval / apply loop. The resulting tree is structured as follows:
 - Tokens to be are evaluated consecutively are placed in a list
 - Parameters taken from the code become child-nodes of the operator token in the syntax tree
 - Block parameters are turned into subtrees and also become child-nodes of the operator token
@@ -118,9 +118,10 @@ if token_type == "value":
 ### Evaluation of Operators
 
 Operator tokens are passed to apply
+
 ```python
 if token_type == 'fn':
-	self.apply(env, token)
+  self._apply(env, token)
 ```
 
 Apply gathers its parameters in the following order:
@@ -132,29 +133,35 @@ for _ in range(token.stack_values):
 stack_parameters = stack_parameters[::-1]
 ```
 2. **code parameters** are taken from the syntax tree and evaluated before being added to the list of parameters
+
 ```python
 for code_token in token.code_tokens:
-	self.eval_context(env, code_token)
-	code_parameters.append(env.pop())
+  self._eval_context(env, code_token)
+  code_parameters.append(env.pop())
 ```
 3. **function parameters** are wrapped to defer execution and passed as lambdas to the operator function. Note that two different types of function could be passed in - operator tokens, or Lambda objects. Python's implementation of closures necessitates that we provide the code to be evaluated into the wrapper as a parameter (see the note in the code for details as to why).
+
 ```python
 for fn_token in token.fn_tokens:
-	if fn_token.token_type == 'fn' and fn_token.value in 'λµ(κ$':
-		def wrapper(t):
-			def f(e):
-				self.eval_context(env, t)
-				run_object(e, e.pop())
-			return f
-		new_lambda = wrapper(fn_token)
-	else:
-		new_lambda = (lambda t: (lambda e: self.eval_context(env, t)))(fn_token)
-	fn_parameters.append(new_lambda)
+  if fn_token.token_type == 'fn' and fn_token.value in 'λµ(κ$':
+    def wrapper(t):
+      def f(e):
+        self._eval_context(env, t)
+        run_object(e, e.pop())
+
+      return f
+
+
+    new_lambda = wrapper(fn_token)
+  else:
+    new_lambda = (lambda t: (lambda e: self._eval_context(env, t)))(fn_token)
+  fn_parameters.append(new_lambda)
 ```
 4. **block parameters** are also wrapped to be run by the block's owner.
+
 ```python
 if token.sub_tree is not None:
-	block_parameters.append(lambda e: self.eval_context(e, token.sub_tree))
+  block_parameters.append(lambda e: self._eval_context(e, token.sub_tree))
 ```
 
 Finally, the operator can be matched with the appropriate type-variant (if one exists) given the types of the parameters that have been found, run and the result is pushed back to the stack.

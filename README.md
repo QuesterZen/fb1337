@@ -20,7 +20,7 @@ While APL was an inspiration and many of the glyphs are shared with APL, the syn
 
 For more on the language see [Language Overview](./docs/language_overview.md).
 
-For more on how the internals work see [Parser Description](./docs/parser.md) and [Interpreter Internals](./docs/interpreter_internals.md). 
+For more on how the internals work see [Parser Description](./docs/interpreting_input) and [Interpreter Internals](./docs/interpreter_internals.md). 
 
 ## Installing and Running fb1337
 
@@ -102,7 +102,7 @@ pip uninstall fb1337
 
 - [Language Overview](./docs/language_overview.md) provides an overview of how to program in fb1337. This is the best place to start if you want to try programming in the language
 
-- [Input Parsing](./docs/parser.md) and [Interpreter Internals](./docs/interpreter_internals.md) provide a lot more details on the language and how expressions are parsed and evaluated. If you are confused about how to enter data, or how expressions are being evaluated, or simply want to know more about how fb1337 was created, these documents are a useful place to start. If you want to read the source code, the main file to look at is [execute.py](./fb1337/execute.py) and work from there.
+- [Input Parsing](./docs/interpreting_input) and [Interpreter Internals](./docs/interpreter_internals.md) provide a lot more details on the language and how expressions are parsed and evaluated. If you are confused about how to enter data, or how expressions are being evaluated, or simply want to know more about how fb1337 was created, these documents are a useful place to start. If you want to read the source code, the main file to look at is [execute.py](./fb1337/execute.py) and work from there.
 
 - [Simple Programs](./docs/simple_programs.md) is an ongoing list of some simple code challenges and the shortest or most interesting solutions in fb1337 so far.
 

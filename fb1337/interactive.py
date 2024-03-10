@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout,
     QInputDialog, QMessageBox
 
 from fb1337.execute import Program
-from fb1337.syntax import SyntaxTree
+from fb1337.parser import SyntaxTree
 
 
 class NotifyWindow(QMainWindow):
@@ -201,7 +201,7 @@ class NotifyWindow(QMainWindow):
         code, ok = QInputDialog.getText(self, "Execute", "Code", )
         if ok and code:
             tree = SyntaxTree(code)
-            self.debugger.program.eval_context(self.env, tree)
+            self.debugger.program._eval_context(self.env, tree)
             self.update(self.env, self.info_dictionary)
 
     @staticmethod

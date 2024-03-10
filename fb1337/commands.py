@@ -19,7 +19,7 @@ from fb1337.dictionary import Dictionary
 from fb1337.iterators import Iterator
 from fb1337.slice import Slice
 from fb1337.lambda_fn import Lambda, run_object, fp2fn
-from fb1337.syntax import add_command_signature
+from fb1337.parser import add_command_signature
 from fb1337.type_utilities import convert_collection, truthy_object, int_value
 from fb1337.type_utilities import parameter_match
 

@@ -13,7 +13,7 @@ from time import perf_counter_ns
 
 from fb1337.execute import Program
 from fb1337.interactive import Interactive
-from fb1337.syntax import SyntaxTree
+from fb1337.parser import SyntaxTree
 from fb1337.type_utilities import parse_program_parameter
 
 

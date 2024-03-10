@@ -10,7 +10,7 @@
 
 
 from fb1337.commands import FBLeet_language, print_commands, print_symbols
-from fb1337.parser import number_aliases, number_names
+from fb1337.lexer import shortcut_aliases, shortcut_names
 
 
 help_text = """
@@ -34,29 +34,29 @@ while True:
     elif c in ['h', 'H', 'help', 'Help', '?']:
         print(help_text)
         print("----- parser -----")
-        for k in number_aliases:
-            print(k, '\t', number_names[k], number_aliases[k])
+        for k in shortcut_aliases:
+            print(k, '\t', shortcut_names[k], shortcut_aliases[k])
         print('⍝', '\t', "Comment")
         print('Ø', '\t', "Null")
         print_commands()
         continue
     elif c in ['symbols', '??', 'all??', 'all symbols', 'all ??', 'sym']:
         print('parser')
-        print('\t', ' '.join([k for k in number_aliases] + ['Ø', '⍝']))
+        print('\t', ' '.join([k for k in shortcut_aliases] + ['Ø', '⍝']))
         print_symbols(grouped=('all' not in c))
         continue
     found = False
 
     # Parser symbols
-    for k, v in number_names.items():
+    for k, v in shortcut_names.items():
         if c in v:
-            print(number_names[k], '\t', "'"+str(k)+"'", number_aliases[k])
+            print(shortcut_names[k], '\t', "'" + str(k) + "'", shortcut_aliases[k])
             found = True
     if all([ch in '01234567890' for ch in c]):
         i = int(c)
-        for k, v in number_aliases.items():
+        for k, v in shortcut_aliases.items():
             if v == i:
-                print(number_names[k], '\t', "'"+str(k)+"'", number_aliases[k])
+                print(shortcut_names[k], '\t', "'" + str(k) + "'", shortcut_aliases[k])
                 found = True
                 break
     for command in ['Ø', 'null', 'none', "Null", "NULL", "''", 'None']:

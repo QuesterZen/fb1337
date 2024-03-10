@@ -12,7 +12,7 @@
 from fb1337.commands import Commands
 from fb1337.environment import Environment
 from fb1337.lambda_fn import run_object
-from fb1337.syntax import SyntaxTree, SyntaxToken
+from fb1337.parser import SyntaxTree, SyntaxToken
 from fb1337.type_utilities import parse_program_parameter, apply_type_transformations, return_value
 
 
@@ -30,6 +30,7 @@ class Program:
 		self.name = self.parameters[0] if len(self.parameters) > 0 and self.parameters[0] is not None else 'f'
 
 	def _notify(self, env, info_dictionary):
+		"""If a debugger has registered for notifications, we send them the debugging info dictionary"""
 		if self.debugger is not None:
 			self.debugger.notify(env, info_dictionary)
 		if self.logging:
@@ -37,30 +38,30 @@ class Program:
 
 	def run(self, path=None):
 		"""This function will run a program in syntax tree form.
-		It is the only function fully exposed to other modules."""
+		It is the only function fully available to other modules."""
 
 		base_env = Environment(path=path)
 		base_env.program_parameters = self.parameters
 
-		self.eval_context(base_env, self.syntax_tree)
+		self._eval_context(base_env, self.syntax_tree)
 
 		return return_value(base_env.get_stack())
 
-	def eval_context(self, env, tree):
-		"""evaluate a single block of code"""
+	def _eval_context(self, env, tree):
+		"""evaluate a single block of code, which is a list of tokens"""
 
 		if isinstance(tree, SyntaxToken):
-			self.eval_token(env, tree)
+			self._eval_token(env, tree)
 
 		elif isinstance(tree, SyntaxTree):
-			self.eval_context(env, tree.tree)
+			self._eval_context(env, tree.tree)
 
 		elif type(tree) is list and len(tree) > 0:
 			for token in tree:
-				self.eval_context(env, token)
+				self._eval_context(env, token)
 
-	def eval_token(self, env, token):
-		"""evaluate a single token blocks are run with eval_context functions are run with apply"""
+	def _eval_token(self, env, token):
+		"""evaluate a single token, including any child nodes"""
 
 		token_type = token.token_type
 
@@ -68,7 +69,7 @@ class Program:
 			self._notify(env, {'token': token})
 
 		elif token_type == 'fn':
-			self.apply(env, token)
+			self._apply(env, token)
 
 		elif token_type == "value":
 			self._notify(env, {'token': token})
@@ -80,8 +81,8 @@ class Program:
 
 		return
 
-	def apply(self, env, token):
-		"""lookup a function token and run the associated code"""
+	def _apply(self, env, token):
+		"""lookup a function token, gather parameters and run the code associated with the function"""
 
 		symbol = token.value
 		stack_parameters = []
@@ -95,7 +96,7 @@ class Program:
 		stack_parameters = stack_parameters[::-1]
 
 		for code_token in token.code_tokens:
-			self.eval_context(env, code_token)
+			self._eval_context(env, code_token)
 			code_parameters.append(env.pop())
 
 		for fn_token in token.fn_tokens:
@@ -110,20 +111,20 @@ class Program:
 			if fn_token.token_type == 'fn' and fn_token.value in 'λµ(κ$':
 				def wrapper(t):
 					def f(e):
-						self.eval_context(env, t)
+						self._eval_context(env, t)
 						run_object(e, e.pop())
 
 					return f
 
 				new_lambda = wrapper(fn_token)
 			else:
-				new_lambda = (lambda t: (lambda e: self.eval_context(env, t)))(fn_token)
+				new_lambda = (lambda t: (lambda e: self._eval_context(env, t)))(fn_token)
 			fn_parameters.append(new_lambda)
 
 		if token.sub_tree is not None:
 			# There is only ever one code block controlled by a single token, it is passed with delayed execution
 			# so the owner can control its environment and timing
-			block_parameters.append(lambda e: self.eval_context(e, token.sub_tree))
+			block_parameters.append(lambda e: self._eval_context(e, token.sub_tree))
 
 		match = self.commands.match_command(symbol, stack_parameters, code_parameters, fn_parameters, block_parameters)
 		if match is None:

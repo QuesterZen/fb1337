@@ -1,6 +1,6 @@
-# fb1337 The Parser
+# fb1337 Interpreting Input
 
-## Parsing Input Parameters
+## Interpreting Input Parameters
 
 When entering values as program parameters, the following transformations are applied:
 - (int) or (bool) -> number value
@@ -29,9 +29,9 @@ Is translated into the parameters:
 ```
 
 
-## Parsing Program Code Strings
+## Reading Program Code Strings
 
-The parser reads the text and breaks it into tokens using regular expression patterns. The following tokens are defined:
+The lexer reads the code and breaks it into tokens using regular expression patterns. The following tokens are defined:
 
 - 'noop' consisting of ` ` and `,`. These characters are not tokenised, but can be used as separators. For example "3 4,5" will be read as three tokens: `<value 3>`, `<value 4>` and `<value 5>`, not the single token `<value 345>`
 
@@ -88,16 +88,18 @@ The following tokens are produced
 
 ## Shortcut Symbols
 
-The following shortcut symbols are currently defined. All of these produce integer values.
+The following shortcut symbols are currently defined. All of these currently produce integer values.
 
-| Symbol | Meaning  | Token                   |
-|--------|----------|-------------------------|
-| ṫ      | ten      | `<value 10>`            |
-| ḟ      | F        | `<value 15>`            |
-| Ḷ      | fifty    | `<value 50>`            |
-| Ḟ      | FF       | `<value 255>`           |
-| ḣ      | hundred  | `<value 100>`           |
-| ḳ      | thousand | `<value 1000>`          |
-| Ḳ      | k        | `<value 1024>`          |
-| ṁ      | million  | `<value 1_000_000>`     |
-| ḃ      | billion  | `<value 1_000_000_000>` |
+| Symbol | Meaning    | Token                   |
+|--------|------------|-------------------------|
+| ṅ      | negative 1 | `<value -1>`            |
+| ẓ      | zero       | `<value 0>`             | 
+| ṫ      | ten        | `<value 10>`            |
+| ḟ      | F          | `<value 15>`            |
+| Ḷ      | fifty      | `<value 50>`            |
+| Ḟ      | FF         | `<value 255>`           |
+| ḣ      | hundred    | `<value 100>`           |
+| ḳ      | thousand   | `<value 1000>`          |
+| Ḳ      | k          | `<value 1024>`          |
+| ṁ      | million    | `<value 1_000_000>`     |
+| ḃ      | billion    | `<value 1_000_000_000>` |
